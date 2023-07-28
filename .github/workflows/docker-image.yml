@@ -13,6 +13,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    # https://github.com/docker/setup-qemu-action
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+
+    # https://github.com/docker/setup-buildx-action
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+      
     - name: Build the Docker image
-      run: docker buildx build --platform linux/arm64 -f ./Dockerfile -t sebastiansu/ubuntu_arm64v8_buildenv .
+    - uses: actions/checkout@v3
+      run: docker buildx build --platform linux/arm/v8 -f ./Dockerfile -t sebastiansu/ubuntu_arm64v8_buildenv .
