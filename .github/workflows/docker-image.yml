@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker buildx build --platform linux/arm64 -f ./Dockerfile -t --tag sebastiansu/ubuntu_arm64v8_buildenv:$(date +%s) .
+      run: docker buildx build --platform linux/arm64 -f ./Dockerfile -t sebastiansu/ubuntu_arm64v8_buildenv .
