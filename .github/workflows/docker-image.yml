@@ -21,9 +21,9 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
+      -
+        name: Login Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - 
         name: Build the Docker image
-        run: docker buildx build --platform linux/arm/v8 -f ./Dockerfile -t sebastiansu/ubuntu_arm64v8_buildenv .
-      -
-        name: Publish Image to Docker Hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}; docker push sebastiansu/ubuntu_arm64v8_buildenv
+        run: docker buildx build --platform linux/arm/v8 -f ./Dockerfile -t sebastiansu/ubuntu_arm64v8_buildenv --output type=image,push=true .
