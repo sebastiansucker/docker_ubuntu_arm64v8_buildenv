@@ -1,6 +1,9 @@
-FROM arm64v8/ubuntu
+FROM arm64v8/ubuntu:20.04
 
 LABEL maintainer="sebastian.sucker@googlemail.com"
 
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y build-essential cmake
+ENV TZ=Europe/Berlin
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt update && apt upgrade -y
+RUN apt install -y build-essential cmake libc6
